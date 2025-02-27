@@ -20,14 +20,14 @@ const tableSlicer = createSlice({
         error:""
     },
     reducers:{
-        fetchNextUser:(state,action)=>{
+        fetchNextUser:(state)=>{
             state.skipUser = state.skipUser+(state.skipUser<state.len?1:0);
-            console.log("skip",state.skipUser,state.len);
+            // console.log("skip",state.skipUser,state.len);
         },
 
-        fetchPrevUser:(state,action)=>{
+        fetchPrevUser:(state)=>{
             state.skipUser = state.skipUser-(state.skipUser>=1?1:0);
-            console.log("prev",state.skipUser,state.len);
+            // console.log("prev",state.skipUser,state.len);
         },
 
         updateLength: (state,action)=>{
@@ -37,7 +37,7 @@ const tableSlicer = createSlice({
     },
     extraReducers:(builder)=>{
         builder
-        .addCase(users.pending,(state,action)=>{
+        .addCase(users.pending,(state)=>{
             state.loading= true;
         })
 

@@ -3,30 +3,19 @@ import { useEffect } from "react";
 import {fetchNextUser, fetchPrevUser, users} from "../features/tableSlicer";
 import {useSelector,useDispatch} from "react-redux"
 // import { nanoid } from "@reduxjs/toolkit";
-import {delay, takeLatest} from "redux-saga/effects";
+// import {delay, takeLatest} from "redux-saga/effects";
 function Table() {
     const dispatch = useDispatch();
     const {skipUser,len} = useSelector((state)=>state);
-    // dispatch(users());
+    // dispatch(users());handleScroll
     useEffect(()=>{
         dispatch(users());
         // console.log("call");
     },[dispatch]);
 
-
-    
-
-
     const userData = useSelector((state)=>state.result);
     let loading = useSelector((state)=>state.loading);
-    // console.log("userData",userData);
-    // function* handleScroll (){
-    //     // if(e.target.scrollDown)
-    //     console.log("call");
-    //     yield delay(1000);
-    //     yield dispatch(fetchNextUser()); 
-    //     yield dispatch(users());
-    // }
+    
     const  getPrevUser = ()=>{
         if(skipUser>=1)
         {dispatch(fetchPrevUser())
