@@ -1,13 +1,7 @@
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 // import {createSagaMiddleware} from "redux-saga"
-export const users = createAsyncThunk('table/users',async(_,thunkAPI)=>{
-    const state = thunkAPI.getState();
-    // console.log("state",state)
-    const response = await axios.get(`https://dummyjson.com/users?skip=${state.skipUser}&limit=1`);
-    return response.data.users[0];
-})
 
+import users from "../actions/fetchData";
 
 // const SagaMiddleware =createSagaMiddleware();
 const tableSlicer = createSlice({
@@ -16,7 +10,7 @@ const tableSlicer = createSlice({
         skipUser:0,
         len:0,
         loading:false,
-        result:{},
+        userData:{},
         error:""
     },
     reducers:{
@@ -44,7 +38,7 @@ const tableSlicer = createSlice({
         .addCase(users.fulfilled,(state,action)=>{
             // console.log("action",action.payload);
             state.loading=false;
-            state.result = action.payload;
+            state.userData = action.payload;
           //  state.len = action.payload.length;
             // console.log("len",action.payload.data.length);   
         })
@@ -60,4 +54,4 @@ const tableSlicer = createSlice({
 // SagaMiddleware(NumberOfUser)
 export const {fetchNextUser,fetchPrevUser,updateLength} = tableSlicer.actions;
 
-export default tableSlicer.reducer
+export const tableReducer = tableSlicer.reducer
